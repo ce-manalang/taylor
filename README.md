@@ -1,73 +1,127 @@
-# React + TypeScript + Vite
+# WWTS — What Would Taylor Say?
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**WWTS** is a small web app that offers gentle life advice inspired by the emotional themes and storytelling tone often found in heartfelt pop songwriting about love, loss, growth, memory, and healing.
 
-Currently, two official plugins are available:
+It’s designed to feel like:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> a trusted friend writing back to you after midnight
+> steady, kind, and quietly hopeful.
 
-## React Compiler
+This project is intentionally simple.
+The goal is not perfection — only something **soft, useful, and alive**.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ✨ MVP Goal
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+A user can:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. Ask a life question
+2. Receive a single, comforting response
+3. Feel understood for a moment
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Nothing more.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+The MVP **does not include**:
+
+* Accounts or authentication
+* Chat history
+* Song-by-song citations
+* Monetization
+* Complex UI
+
+If it doesn’t help answer **one question well**, it belongs after MVP.
+
+---
+
+## 🧠 How it works
+
+WWTS connects a simple React interface to an OpenAI agent that:
+
+* responds with empathy and emotional clarity
+* uses original language inspired by common themes in love and growing up
+* **does not quote copyrighted lyrics**
+* keeps answers concise, warm, and reflective
+
+The focus is emotional usefulness, not imitation.
+
+---
+
+## 🛠 Tech Stack
+
+* **React + Vite**
+* **TypeScript**
+* **OpenAI Agent / API** (planned connection after UI MVP)
+* Minimal CSS (intentional simplicity)
+
+---
+
+## 🚀 Getting started
+
+### 1. Install dependencies
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Run the development server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Open the local URL shown in the terminal
+(usually `http://localhost:5173`).
+
+If you see the WWTS title screen, the app is running.
+
+---
+
+## 📁 Project structure (early)
+
+```
+wwts/
+  src/
+    App.tsx
+    main.tsx
+  index.html
+  package.json
+```
+
+This will grow slowly and intentionally.
+
+---
+
+## 🌱 Development philosophy
+
+This project follows a few gentle rules:
+
+* **Small steps are real progress**
+* **Ship feelings before features**
+* **Clarity over cleverness**
+* **Done is kinder than perfect**
+
+WWTS is meant to stay **tiny, calm, and human**.
+
+---
+
+## 🗺 Future possibilities (after MVP)
+
+* Choose an emotional “era”
+* Daily advice card
+* Shareable quote images
+* Journaling mode
+* Mobile-first design
+* Save meaningful responses
+
+Only after the core experience feels true.
+
+---
+
+## 🤍 Why this exists
+
+Sometimes people don’t need solutions.
+They just need words that help them breathe a little easier.
+
+WWTS is a small attempt to offer that moment of quiet understanding
+through software.
