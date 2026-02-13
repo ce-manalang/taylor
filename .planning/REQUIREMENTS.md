@@ -79,26 +79,26 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CORE-01 | — | Pending |
-| CORE-02 | — | Pending |
-| CORE-03 | — | Pending |
-| CORE-04 | — | Pending |
-| CORE-05 | — | Pending |
-| PRES-01 | — | Pending |
-| PRES-02 | — | Pending |
-| PRES-03 | — | Pending |
-| PRES-04 | — | Pending |
-| SECR-01 | — | Pending |
-| SECR-02 | — | Pending |
-| SECR-03 | — | Pending |
-| DATA-01 | — | Pending |
-| DATA-02 | — | Pending |
+| CORE-01 | Phase 3 | Pending |
+| CORE-02 | Phase 2 | Pending |
+| CORE-03 | Phase 3 | Pending |
+| CORE-04 | Phase 3 | Pending |
+| CORE-05 | Phase 3 | Pending |
+| PRES-01 | Phase 3 | Pending |
+| PRES-02 | Phase 3 | Pending |
+| PRES-03 | Phase 3 | Pending |
+| PRES-04 | Phase 3 | Pending |
+| SECR-01 | Phase 1 | Pending |
+| SECR-02 | Phase 1 | Pending |
+| SECR-03 | Phase 1 | Pending |
+| DATA-01 | Phase 2 | Pending |
+| DATA-02 | Phase 2 | Pending |
 
 **Coverage:**
 - v1 requirements: 14 total
-- Mapped to phases: 0
-- Unmapped: 14 ⚠️
+- Mapped to phases: 14
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-13*
-*Last updated: 2026-02-13 after initial definition*
+*Last updated: 2026-02-13 after roadmap creation*
