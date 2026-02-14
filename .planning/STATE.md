@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 ## Current Position
 
 Phase: 1 of 3 (Backend & Security)
-Plan: Ready to plan (no plans created yet)
-Status: Ready to plan
-Last activity: 2026-02-13 — Roadmap created
+Plan: 2 of 3 (executing 01-02-PLAN.md next)
+Status: In progress
+Last activity: 2026-02-14 — Completed plan 01-01
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [███░░░░░░░] 33%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 0
-- Average duration: - min
-- Total execution time: 0.0 hours
+- Total plans completed: 1
+- Average duration: 2 min
+- Total execution time: 0.03 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| 01-backend-security | 1/3 | 2min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: none yet
-- Trend: Not applicable
+- Last 5 plans: 01-01 (2min)
+- Trend: Just started
 
 *Updated after each plan completion*
 
@@ -42,6 +42,15 @@ Progress: [░░░░░░░░░░] 0%
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
+**From Plan 01-01:**
+- OpenAI timeout locked at 10 seconds for predictable serverless behavior
+- Zero retries on OpenAI client to avoid unpredictable latency
+- Hourly rate limit: 5 requests (1 question + 4 retries/variations)
+- Daily rate limit: 75 requests (midpoint of 50-100 range)
+- Identical error message for all rejection types to avoid revealing detection logic
+- Vercel function max duration: 15 seconds (allows overhead beyond 10s OpenAI timeout)
+
+**Earlier decisions:**
 - Curated lyrics dataset (not LLM memory) — Control over exactly which lyrics appear, quality over quantity
 - LLM picks the lyric (not tags/search) — Natural language understanding matches emotional nuance better than categories
 - Just the lyric, no context — The line should speak for itself, explanations diminish the moment
@@ -54,8 +63,7 @@ None yet.
 ### Blockers/Concerns
 
 **Phase 1 (Backend & Security):**
-- Must choose serverless platform (Netlify vs Vercel) — both support environment variables and rate limiting
-- Research suggests Netlify Functions or Vercel Edge Functions — need to validate with existing Vite setup
+- ~~Must choose serverless platform~~ — RESOLVED: Using Vercel (vercel.json created in 01-01)
 
 **Phase 2 (Core Matching):**
 - Few-shot prompt engineering requires domain expertise in Taylor Swift catalog
@@ -66,6 +74,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-02-13 (roadmap creation)
-Stopped at: Roadmap and state files created, awaiting phase 1 planning
+Last session: 2026-02-14 (plan execution)
+Stopped at: Completed 01-01-PLAN.md (backend infrastructure)
 Resume file: None
+Next action: Execute 01-02-PLAN.md (API endpoint)
