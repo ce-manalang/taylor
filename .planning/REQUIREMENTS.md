@@ -24,9 +24,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Security
 
-- [ ] **SECR-01**: OpenAI API key is hidden behind a serverless backend proxy
-- [ ] **SECR-02**: API requests are rate-limited to prevent abuse and cost spikes
-- [ ] **SECR-03**: User input is sanitized to prevent prompt injection
+- [x] **SECR-01**: OpenAI API key is hidden behind a serverless backend proxy
+- [x] **SECR-02**: API requests are rate-limited to prevent abuse and cost spikes
+- [x] **SECR-03**: User input is sanitized to prevent prompt injection
 
 ### Data
 
@@ -88,9 +88,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PRES-02 | Phase 3 | Pending |
 | PRES-03 | Phase 3 | Pending |
 | PRES-04 | Phase 3 | Pending |
-| SECR-01 | Phase 1 | Pending |
-| SECR-02 | Phase 1 | Pending |
-| SECR-03 | Phase 1 | Pending |
+| SECR-01 | Phase 1 | Complete |
+| SECR-02 | Phase 1 | Complete |
+| SECR-03 | Phase 1 | Complete |
 | DATA-01 | Phase 2 | Pending |
 | DATA-02 | Phase 2 | Pending |
 
@@ -101,4 +101,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-02-13*
-*Last updated: 2026-02-13 after roadmap creation*
+*Last updated: 2026-02-14 after Phase 1 completion*
