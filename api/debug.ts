@@ -1,16 +1,44 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { Redis } from '@upstash/redis';
+import OpenAI from 'openai';
 
-export default function handler(_req: VercelRequest, res: VercelResponse) {
-  const envCheck = {
-    OPENAI_API_KEY: !!process.env.OPENAI_API_KEY,
-    REDIS_URL: !!process.env.REDIS_URL,
-    REDIS_TOKEN: !!process.env.REDIS_TOKEN,
-    UPSTASH_REDIS_REST_URL: !!process.env.UPSTASH_REDIS_REST_URL,
-    UPSTASH_REDIS_REST_TOKEN: !!process.env.UPSTASH_REDIS_REST_TOKEN,
-    KV_REST_API_URL: !!process.env.KV_REST_API_URL,
-    KV_REST_API_TOKEN: !!process.env.KV_REST_API_TOKEN,
-    KV_URL: !!process.env.KV_URL,
-    nodeVersion: process.version,
+export default async function handler(_req: VercelRequest, res: VercelResponse) {
+  const results: Record<string, any> = {
+    envVars: {
+      OPENAI_API_KEY: !!process.env.OPENAI_API_KEY,
+      REDIS_URL: !!process.env.REDIS_URL,
+      REDIS_TOKEN: !!process.env.REDIS_TOKEN,
+    },
   };
-  res.status(200).json(envCheck);
+
+  // Test Redis connection
+  try {
+    const redis = new Redis({
+      url: process.env.REDIS_URL!,
+      token: process.env.REDIS_TOKEN!,
+    });
+    await redis.ping();
+    results.redis = 'connected';
+  } catch (e: any) {
+    results.redis = `error: ${e.message}`;
+  }
+
+  // Test OpenAI connection
+  try {
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY!,
+      timeout: 10000,
+      maxRetries: 0,
+    });
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [{ role: 'user', content: 'Say hello' }],
+      max_tokens: 5,
+    });
+    results.openai = `connected: ${completion.choices[0]?.message?.content}`;
+  } catch (e: any) {
+    results.openai = `error: ${e.message}`;
+  }
+
+  res.status(200).json(results);
 }
