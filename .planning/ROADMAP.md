@@ -21,10 +21,12 @@ This roadmap delivers a working lyric-matching advice app in three phases. Phase
   2. API requests are rate-limited to prevent abuse (5 requests/hour per user, 100/day per IP)
   3. User input is sanitized before being sent to LLM to prevent prompt injection
   4. Backend proxy successfully forwards requests to OpenAI and returns responses
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: TBD
+- [ ] 01-01-PLAN.md — Project infrastructure and library modules (deps, types, OpenAI client, rate limiter, sanitizer)
+- [ ] 01-02-PLAN.md — API endpoint and local development mock (serverless function, mock API, frontend client)
+- [ ] 01-03-PLAN.md — Vercel deployment and end-to-end verification (deploy, configure env vars, verify)
 
 ### Phase 2: Core Matching
 **Goal**: Working lyric matching engine that understands emotional context
@@ -62,6 +64,6 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Backend & Security | 0/TBD | Not started | - |
+| 1. Backend & Security | 0/3 | Not started | - |
 | 2. Core Matching | 0/TBD | Not started | - |
 | 3. User Interface | 0/TBD | Not started | - |
