@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 ## Current Position
 
 Phase: 1 of 3 (Backend & Security)
-Plan: 2 of 3 (executing 01-02-PLAN.md next)
+Plan: 3 of 3 (executing 01-03-PLAN.md next)
 Status: In progress
-Last activity: 2026-02-14 — Completed plan 01-01
+Last activity: 2026-02-14 — Completed plan 01-02
 
-Progress: [███░░░░░░░] 33%
+Progress: [██████░░░░] 67%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 1
+- Total plans completed: 2
 - Average duration: 2 min
-- Total execution time: 0.03 hours
+- Total execution time: 0.07 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-backend-security | 1/3 | 2min | 2min |
+| 01-backend-security | 2/3 | 4min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (2min)
-- Trend: Just started
+- Last 5 plans: 01-01 (2min), 01-02 (2min)
+- Trend: Consistent 2min/plan
 
 *Updated after each plan completion*
 
@@ -41,6 +41,16 @@ Progress: [███░░░░░░░] 33%
 
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
+
+**From Plan 01-02:**
+- Mock API returns hardcoded lyric 'Long story short, I survived' for all valid inputs
+- Mock simulates 800-1200ms network delay for realistic development feel
+- No rate limiting simulation in mock - keeps local development simple
+- API client uses import.meta.env.DEV (Vite built-in) for environment detection
+- Production API path is /api/ask (relative URL, works on same domain)
+- OpenAI model locked at gpt-4o-mini for Phase 1 cost efficiency
+- OpenAI system prompt is generic for Phase 1 - Phase 2 will refine matching logic
+- Timeout errors return 504 status, other errors return 500 status
 
 **From Plan 01-01:**
 - OpenAI timeout locked at 10 seconds for predictable serverless behavior
@@ -75,6 +85,6 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-14 (plan execution)
-Stopped at: Completed 01-01-PLAN.md (backend infrastructure)
+Stopped at: Completed 01-02-PLAN.md (API endpoint)
 Resume file: None
-Next action: Execute 01-02-PLAN.md (API endpoint)
+Next action: Execute 01-03-PLAN.md (security testing)
