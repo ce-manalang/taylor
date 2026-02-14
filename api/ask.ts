@@ -20,11 +20,11 @@ export default async function handler(
 
   try {
     // Dynamically import dependencies to avoid module initialization errors
-    const { openai } = await import('../src/lib/openai.js');
+    const { openai } = await import('../src/lib/openai');
     const { rateLimiter, dailyRateLimiter } = await import(
-      '../src/lib/ratelimit.js'
+      '../src/lib/ratelimit'
     );
-    const { sanitizeInput } = await import('../src/lib/sanitize.js');
+    const { sanitizeInput } = await import('../src/lib/sanitize');
 
     // 1. Extract client IP from x-forwarded-for header
     const forwardedFor = req.headers['x-forwarded-for'];
