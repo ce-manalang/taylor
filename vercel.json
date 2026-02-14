@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "api/ask.ts": {
+      "maxDuration": 15,
+      "memory": 1024
+    }
+  }
+}
