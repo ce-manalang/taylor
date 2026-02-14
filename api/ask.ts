@@ -4,9 +4,6 @@
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { openai } from '../src/lib/openai';
-import { rateLimiter, dailyRateLimiter } from '../src/lib/ratelimit';
-import { sanitizeInput } from '../src/lib/sanitize';
 
 /**
  * Serverless function handler for /api/ask endpoint.
@@ -22,6 +19,13 @@ export default async function handler(
   }
 
   try {
+    // Dynamically import dependencies to avoid module initialization errors
+    const { openai } = await import('../src/lib/openai.js');
+    const { rateLimiter, dailyRateLimiter } = await import(
+      '../src/lib/ratelimit.js'
+    );
+    const { sanitizeInput } = await import('../src/lib/sanitize.js');
+
     // 1. Extract client IP from x-forwarded-for header
     const forwardedFor = req.headers['x-forwarded-for'];
     const clientIP =
@@ -87,8 +91,30 @@ export default async function handler(
     // 7. Return success
     return res.status(200).json({ lyric });
   } catch (error: any) {
-    // Log error for debugging
+    // Log error for debugging (visible in Vercel logs)
     console.error('API error:', error);
+
+    // Provide specific error messages for configuration issues
+    if (error.message?.includes('OPENAI_API_KEY')) {
+      console.error(
+        'Environment variable OPENAI_API_KEY is not configured in Vercel'
+      );
+      return res
+        .status(500)
+        .json({ error: 'Something went wrong, try again' });
+    }
+
+    if (
+      error.message?.includes('REDIS_URL') ||
+      error.message?.includes('REDIS_TOKEN')
+    ) {
+      console.error(
+        'Environment variables REDIS_URL or REDIS_TOKEN are not configured in Vercel'
+      );
+      return res
+        .status(500)
+        .json({ error: 'Something went wrong, try again' });
+    }
 
     // Check for timeout errors
     if (error.code === 'ETIMEDOUT' || error.name?.includes('Timeout')) {
