@@ -59,12 +59,14 @@ function getOpenAI(): OpenAI {
 
 function getRateLimiters() {
   if (!rateLimiter || !dailyRateLimiter) {
-    if (!process.env.REDIS_URL || !process.env.REDIS_TOKEN) {
-      throw new Error('REDIS_URL and REDIS_TOKEN environment variables are required');
+    const redisUrl = process.env.REDIS_URL || process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+    const redisToken = process.env.REDIS_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+    if (!redisUrl || !redisToken) {
+      throw new Error('Redis environment variables are required (REDIS_URL/REDIS_TOKEN or UPSTASH_REDIS_REST_URL/UPSTASH_REDIS_REST_TOKEN)');
     }
     const redis = new Redis({
-      url: process.env.REDIS_URL,
-      token: process.env.REDIS_TOKEN,
+      url: redisUrl,
+      token: redisToken,
     });
     rateLimiter = new Ratelimit({
       redis,
