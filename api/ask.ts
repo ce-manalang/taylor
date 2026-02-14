@@ -59,8 +59,8 @@ function getOpenAI(): OpenAI {
 
 function getRateLimiters() {
   if (!rateLimiter || !dailyRateLimiter) {
-    const redisUrl = process.env.REDIS_URL || process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
-    const redisToken = process.env.REDIS_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+    const redisUrl = process.env.REDIS_KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || process.env.REDIS_URL;
+    const redisToken = process.env.REDIS_KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || process.env.REDIS_TOKEN;
     if (!redisUrl || !redisToken) {
       throw new Error('Redis environment variables are required (REDIS_URL/REDIS_TOKEN or UPSTASH_REDIS_REST_URL/UPSTASH_REDIS_REST_TOKEN)');
     }
