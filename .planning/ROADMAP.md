@@ -7,7 +7,7 @@ This roadmap delivers a working lyric-matching advice app in three phases. Phase
 ## Phases
 
 - [x] **Phase 1: Backend & Security** - Secure serverless foundation for API calls
-- [ ] **Phase 2: Core Matching** - Semantic lyric matching engine with curated dataset
+- [x] **Phase 2: Core Matching** - Semantic lyric matching engine with curated dataset
 - [ ] **Phase 3: User Interface** - Complete interaction flow with polished presentation
 
 ## Phase Details
@@ -41,9 +41,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 02-01-PLAN.md -- Supabase schema, lyrics curation, seed script with embeddings
-- [ ] 02-02-PLAN.md -- Core matching pipeline in api/ask.ts (embedding, pgvector, LLM selection, fallbacks)
-- [ ] 02-03-PLAN.md -- Vercel deployment and end-to-end matching verification
+- [x] 02-01-PLAN.md -- Supabase schema, lyrics curation, seed script with embeddings
+- [x] 02-02-PLAN.md -- Core matching pipeline in api/ask.ts (embedding, pgvector, LLM selection, fallbacks)
+- [x] 02-03-PLAN.md -- Vercel deployment and end-to-end matching verification
 
 ### Phase 3: User Interface
 **Goal**: Complete end-to-end user experience from question to lyric
@@ -67,5 +67,5 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Backend & Security | 3/3 | ✓ Complete | 2026-02-14 |
-| 2. Core Matching | 0/TBD | Not started | - |
+| 2. Core Matching | 3/3 | ✓ Complete | 2026-02-15 |
 | 3. User Interface | 0/TBD | Not started | - |

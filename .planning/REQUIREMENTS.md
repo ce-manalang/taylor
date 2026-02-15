@@ -10,7 +10,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Core Interaction
 
 - [ ] **CORE-01**: User can type a life question into a text input
-- [ ] **CORE-02**: User submits question and app matches it against curated lyrics via LLM
+- [x] **CORE-02**: User submits question and app matches it against curated lyrics via LLM
 - [ ] **CORE-03**: User sees a single Taylor Swift lyric as the response
 - [ ] **CORE-04**: User sees a loading indicator while the lyric is being matched
 - [ ] **CORE-05**: User sees suggested starter questions to inspire their first ask
@@ -30,8 +30,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Data
 
-- [ ] **DATA-01**: Curated lyrics dataset seeded with initial Taylor Swift lyric collection
-- [ ] **DATA-02**: LLM prompt includes few-shot examples for emotional tone calibration
+- [x] **DATA-01**: Curated lyrics dataset seeded with initial Taylor Swift lyric collection
+- [x] **DATA-02**: LLM prompt includes few-shot examples for emotional tone calibration
 
 ## v2 Requirements
 
@@ -80,7 +80,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | CORE-01 | Phase 3 | Pending |
-| CORE-02 | Phase 2 | Pending |
+| CORE-02 | Phase 2 | Complete |
 | CORE-03 | Phase 3 | Pending |
 | CORE-04 | Phase 3 | Pending |
 | CORE-05 | Phase 3 | Pending |
@@ -91,8 +91,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SECR-01 | Phase 1 | Complete |
 | SECR-02 | Phase 1 | Complete |
 | SECR-03 | Phase 1 | Complete |
-| DATA-01 | Phase 2 | Pending |
-| DATA-02 | Phase 2 | Pending |
+| DATA-01 | Phase 2 | Complete |
+| DATA-02 | Phase 2 | Complete |
 
 **Coverage:**
 - v1 requirements: 14 total
@@ -101,4 +101,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-02-13*
-*Last updated: 2026-02-14 after Phase 1 completion*
+*Last updated: 2026-02-15 after Phase 2 completion*
