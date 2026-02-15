@@ -2,6 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 import OpenAI from 'openai';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 // --- Sanitization (inline from src/lib/sanitize.ts) ---
 
@@ -40,6 +41,7 @@ function sanitizeInput(input: string): { safe: boolean; error?: string } {
 // --- Lazy initialization (avoids crash if env vars missing) ---
 
 let openai: OpenAI | null = null;
+let supabaseClient: SupabaseClient | null = null;
 let rateLimiter: Ratelimit | null = null;
 let dailyRateLimiter: Ratelimit | null = null;
 
@@ -55,6 +57,20 @@ function getOpenAI(): OpenAI {
     });
   }
   return openai;
+}
+
+function getSupabase(): SupabaseClient {
+  if (!supabaseClient) {
+    const url = process.env.SUPABASE_URL;
+    const key = process.env.SUPABASE_ANON_KEY;
+    if (!url || !key) {
+      throw new Error('SUPABASE_URL and SUPABASE_ANON_KEY are required');
+    }
+    supabaseClient = createClient(url, key, {
+      auth: { persistSession: false }  // serverless: no session persistence
+    });
+  }
+  return supabaseClient;
 }
 
 function getRateLimiters() {
@@ -80,6 +96,20 @@ function getRateLimiters() {
     });
   }
   return { rateLimiter: rateLimiter!, dailyRateLimiter: dailyRateLimiter! };
+}
+
+// --- Fallback messages ---
+
+const FALLBACK_MESSAGES = [
+  "Some feelings are still waiting for their song.",
+  "Not every question has found its lyric yet.",
+  "Even Taylor doesn't have words for everything.",
+  "This one's still between the lines.",
+  "Sometimes silence says more than lyrics can."
+];
+
+function getRandomFallback(): string {
+  return FALLBACK_MESSAGES[Math.floor(Math.random() * FALLBACK_MESSAGES.length)];
 }
 
 // --- Handler ---
@@ -128,27 +158,87 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
       return;
     }
 
-    // 6. Call OpenAI API
-    const client = getOpenAI();
-    const completion = await client.chat.completions.create({
+    // 6. Generate embedding for user question
+    const embeddingResponse = await getOpenAI().embeddings.create({
+      model: 'text-embedding-3-small',  // Locked model — do NOT mix with ada-002
+      input: question
+    });
+    const queryEmbedding = embeddingResponse.data[0].embedding;
+
+    // 7. Find top 3 similar lyrics via pgvector
+    const { data: candidates, error: dbError } = await getSupabase().rpc('match_lyrics', {
+      query_embedding: queryEmbedding,
+      match_threshold: 0.70,  // Start conservative, tune based on testing
+      match_count: 3
+    });
+
+    if (dbError) throw dbError;
+
+    // 8. Handle no candidates (all below threshold)
+    if (!candidates || candidates.length === 0) {
+      res.status(200).json({ lyric: getRandomFallback() });
+      return;
+    }
+
+    // 9. LLM selects best match from candidates with few-shot examples
+    const completion = await getOpenAI().chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
         {
           role: 'system',
-          content: 'You are helping match a life question to a Taylor Swift lyric. Return only the lyric text, nothing else.',
+          content: `You match life questions to Taylor Swift lyrics. Feel the emotional weight of the question — not just the words, but the ache or hope behind them. Return ONLY the lyric text (1-2 lines, nothing else). If none of the candidates truly speak to the question, respond with exactly "NO_MATCH".`
         },
-        { role: 'user', content: question },
+        // Few-shot example 1: self-doubt -> empowerment
+        {
+          role: 'user',
+          content: `Question: "How do I stop caring what people think of me?"
+Candidates:
+1. "I'm the only one of me, baby, that's the fun of me"
+2. "It's me, hi, I'm the problem, it's me"
+3. "Long live the walls we crashed through"`
+        },
+        { role: 'assistant', content: `I'm the only one of me, baby, that's the fun of me` },
+        // Few-shot example 2: heartbreak -> raw pain
+        {
+          role: 'user',
+          content: `Question: "Why does losing someone hurt this much?"
+Candidates:
+1. "You call me up again just to break me like a promise"
+2. "We are never ever getting back together"
+3. "I'm the only one of me, baby, that's the fun of me"`
+        },
+        { role: 'assistant', content: `You call me up again just to break me like a promise` },
+        // Few-shot example 3: NO_MATCH demonstration
+        {
+          role: 'user',
+          content: `Question: "What's the best programming language?"
+Candidates:
+1. "Shake it off, shake it off"
+2. "This is me trying"
+3. "We are never ever getting back together"`
+        },
+        { role: 'assistant', content: `NO_MATCH` },
+        // Current query
+        {
+          role: 'user',
+          content: `Question: "${question}"
+Candidates:
+${candidates.map((c: any, i: number) => `${i + 1}. "${c.lyric_text}"`).join('\n')}`
+        }
       ],
-      max_tokens: 150,
+      temperature: 0.6,  // Emotional variation — "feels alive" per user decision
+      max_tokens: 100
     });
 
-    const lyric = completion.choices[0]?.message?.content;
-    if (!lyric) {
-      res.status(500).json({ error: 'Something went wrong, try again' });
+    const lyric = completion.choices[0]?.message?.content?.trim();
+
+    // 10. Handle NO_MATCH or empty response
+    if (!lyric || lyric === 'NO_MATCH') {
+      res.status(200).json({ lyric: getRandomFallback() });
       return;
     }
 
-    // 7. Return success
+    // 11. Return matched lyric
     res.status(200).json({ lyric });
   } catch (error: any) {
     console.error('API error:', error);
