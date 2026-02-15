@@ -10,29 +10,29 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 ## Current Position
 
 Phase: 2 of 3 (Core Matching)
-Plan: 1 of 3 (complete)
+Plan: 2 of 3 (complete)
 Status: Phase 2 in progress
-Last activity: 2026-02-15 — Completed plan 02-01 (Supabase database setup)
+Last activity: 2026-02-15 — Completed plan 02-02 (Matching Engine API)
 
-Progress: [███░░░░░░░] 33% (Phase 2 plans)
+Progress: [██████░░░░] 67% (Phase 2 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
-- Average duration: ~11 min
-- Total execution time: ~0.75 hours
+- Total plans completed: 5
+- Average duration: ~9 min
+- Total execution time: ~0.85 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-backend-security | 3/3 | ~30min | ~10min |
-| 02-core-matching | 1/3 | ~15min | ~15min |
+| 02-core-matching | 2/3 | ~17min | ~8.5min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (2min), 01-02 (2min), 01-03 (~30min incl. debugging), 02-01 (15min)
-- Trend: 02-01 included human-action checkpoint for Supabase setup
+- Last 5 plans: 01-02 (2min), 01-03 (~30min incl. debugging), 02-01 (15min), 02-02 (2min)
+- Trend: 02-02 was fast (straightforward implementation with clear design)
 
 *Updated after each plan completion*
 
@@ -42,6 +42,14 @@ Progress: [███░░░░░░░] 33% (Phase 2 plans)
 
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
+
+**From Plan 02-02:**
+- Temperature 0.6 for emotional variation - repeated questions can return different lyrics (feels alive)
+- 3 few-shot examples: self-doubt->empowerment, heartbreak->raw pain, NO_MATCH demonstration
+- System prompt tone: poetic & intuitive - "feel the emotional weight, not just the words"
+- Match threshold 0.70 to start - conservative tuning, can adjust based on testing
+- Fallback messages are soft & poetic (not error-like) - Claude-authored
+- Response enforcement in prompt only (no post-hoc validation) - trust the calibration
 
 **From Plan 02-01:**
 - Use text-embedding-3-small (not ada-002) - 5x cheaper, better accuracy, locked model choice
@@ -58,13 +66,13 @@ Recent decisions affecting current work:
 - Debug endpoint created and removed during verification
 
 **From Plan 01-02:**
-- Mock API returns hardcoded lyric 'Long story short, I survived' for all valid inputs
+- Mock API now returns varied lyrics from pool (updated in 02-02) - simulates temperature > 0
+- Mock simulates fallback messages for short questions (updated in 02-02)
 - Mock simulates 800-1200ms network delay for realistic development feel
 - No rate limiting simulation in mock - keeps local development simple
 - API client uses import.meta.env.DEV (Vite built-in) for environment detection
 - Production API path is /api/ask (relative URL, works on same domain)
-- OpenAI model locked at gpt-4o-mini for Phase 1 cost efficiency
-- OpenAI system prompt is generic for Phase 1 - Phase 2 will refine matching logic
+- OpenAI model locked at gpt-4o-mini for matching selection
 
 **From Plan 01-01:**
 - OpenAI timeout locked at 10 seconds for predictable serverless behavior
@@ -98,7 +106,7 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-02-15 (Phase 2 plan 02-01 execution)
-Stopped at: Completed 02-01-PLAN.md (Supabase database setup)
+Last session: 2026-02-15 (Phase 2 plan 02-02 execution)
+Stopped at: Completed 02-02-PLAN.md (Matching Engine API)
 Resume file: None
-Next action: Continue Phase 2 with plan 02-02 (Matching Engine API)
+Next action: Continue Phase 2 with plan 02-03 (Prompt Refinement)
