@@ -38,10 +38,12 @@ Plans:
   3. System returns a single lyric (2-3 lines max) that fits the emotional tone of the question
   4. LLM prompt includes few-shot examples that calibrate emotional matching accuracy
   5. Response validation enforces length limits and prevents full song reproduction
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: TBD
+- [ ] 02-01-PLAN.md -- Supabase schema, lyrics curation, seed script with embeddings
+- [ ] 02-02-PLAN.md -- Core matching pipeline in api/ask.ts (embedding, pgvector, LLM selection, fallbacks)
+- [ ] 02-03-PLAN.md -- Vercel deployment and end-to-end matching verification
 
 ### Phase 3: User Interface
 **Goal**: Complete end-to-end user experience from question to lyric
