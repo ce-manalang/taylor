@@ -9,18 +9,18 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Core Interaction
 
-- [ ] **CORE-01**: User can type a life question into a text input
+- [x] **CORE-01**: User can type a life question into a text input
 - [x] **CORE-02**: User submits question and app matches it against curated lyrics via LLM
-- [ ] **CORE-03**: User sees a single Taylor Swift lyric as the response
-- [ ] **CORE-04**: User sees a loading indicator while the lyric is being matched
-- [ ] **CORE-05**: User sees suggested starter questions to inspire their first ask
+- [x] **CORE-03**: User sees a single Taylor Swift lyric as the response
+- [x] **CORE-04**: User sees a loading indicator while the lyric is being matched
+- [x] **CORE-05**: User sees suggested starter questions to inspire their first ask
 
 ### Presentation
 
-- [ ] **PRES-01**: UI is mobile-responsive and works well on phone screens
-- [ ] **PRES-02**: User can copy the displayed lyric to clipboard with one tap
-- [ ] **PRES-03**: Lyric appears with a reveal animation (fade-in or typewriter effect)
-- [ ] **PRES-04**: UI feels soft, warm, and calm — matches "trusted friend after midnight" tone
+- [x] **PRES-01**: UI is mobile-responsive and works well on phone screens
+- [x] **PRES-02**: User can copy the displayed lyric to clipboard with one tap
+- [x] **PRES-03**: Lyric appears with a reveal animation (fade-in or typewriter effect)
+- [x] **PRES-04**: UI feels soft, warm, and calm — matches "trusted friend after midnight" tone
 
 ### Security
 
@@ -79,15 +79,15 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CORE-01 | Phase 3 | Pending |
+| CORE-01 | Phase 3 | Complete |
 | CORE-02 | Phase 2 | Complete |
-| CORE-03 | Phase 3 | Pending |
-| CORE-04 | Phase 3 | Pending |
-| CORE-05 | Phase 3 | Pending |
-| PRES-01 | Phase 3 | Pending |
-| PRES-02 | Phase 3 | Pending |
-| PRES-03 | Phase 3 | Pending |
-| PRES-04 | Phase 3 | Pending |
+| CORE-03 | Phase 3 | Complete |
+| CORE-04 | Phase 3 | Complete |
+| CORE-05 | Phase 3 | Complete |
+| PRES-01 | Phase 3 | Complete |
+| PRES-02 | Phase 3 | Complete |
+| PRES-03 | Phase 3 | Complete |
+| PRES-04 | Phase 3 | Complete |
 | SECR-01 | Phase 1 | Complete |
 | SECR-02 | Phase 1 | Complete |
 | SECR-03 | Phase 1 | Complete |
@@ -101,4 +101,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-02-13*
-*Last updated: 2026-02-15 after Phase 2 completion*
+*Last updated: 2026-02-16 after Phase 3 completion*
