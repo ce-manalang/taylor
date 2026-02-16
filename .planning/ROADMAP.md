@@ -57,10 +57,11 @@ Plans:
   5. User sees suggested starter questions if they need inspiration
   6. UI is mobile-responsive and works well on phone screens with proper touch targets
   7. UI feels soft, warm, and calm — color scheme and typography match "trusted friend after midnight" tone
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 03-01: TBD
+- [ ] 03-01-PLAN.md — Design system foundation and UI components (fonts, CSS variables, 5 component files)
+- [ ] 03-02-PLAN.md — App integration and visual verification (state management, animation flow, human checkpoint)
 
 ## Progress
 
@@ -68,4 +69,4 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Backend & Security | 3/3 | ✓ Complete | 2026-02-14 |
 | 2. Core Matching | 3/3 | ✓ Complete | 2026-02-15 |
-| 3. User Interface | 0/TBD | Not started | - |
+| 3. User Interface | 0/2 | Not started | - |
