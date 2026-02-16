@@ -1,42 +1,89 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 24px;
+  transition: padding-top var(--transition-slow);
+}
+
+/* Initial state: input area centered vertically */
+.app-input-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  transition: all var(--transition-slow);
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+/* After submission: input moves to top area */
+.app-container.submitted .app-input-area {
+  margin-top: 10vh;
+  margin-bottom: 0;
+}
+
+.app-response-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  flex: 1;
+  padding-top: 48px;
+}
+
+.app-error {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
   text-align: center;
+  line-height: 1.7;
+  animation: fade-in 0.3s ease;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.app-actions {
+  display: flex;
+  justify-content: center;
+  animation: fade-in 0.4s ease;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.app-reset-button {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-top: 32px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition: all var(--transition-fast);
+  animation: fade-in 0.4s ease;
+  min-height: 44px;
+}
+
+.app-reset-button:hover {
+  color: var(--color-text);
+  background: var(--color-bg-secondary);
+}
+
+@media (max-width: 600px) {
+  .app-container {
+    padding: 16px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .app-container.submitted .app-input-area {
+    margin-top: 5vh;
+  }
+
+  .app-response-area {
+    padding-top: 32px;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (prefers-reduced-motion: reduce) {
+  .app-input-area {
+    transition: none;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
