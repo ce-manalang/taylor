@@ -47,6 +47,14 @@ function App() {
     setTypingComplete(false);
   }, []);
 
+  // Stable callback — prevents LyricDisplay effect from re-running
+  // (setTypingComplete is stable per React guarantees)
+  const handleAnimationComplete = useCallback(() => {
+    setTypingComplete(true);
+  }, []);
+
+  const showResponse = hasSubmitted && (isLoading || lyric || error);
+
   return (
     <div className={`app-container ${hasSubmitted ? 'submitted' : ''}`}>
       <div className="app-input-area">
@@ -65,37 +73,39 @@ function App() {
         )}
       </div>
 
-      <div className="app-response-area">
-        {isLoading && <LoadingDots />}
+      {showResponse && (
+        <div className="app-response-area">
+          {isLoading && <LoadingDots />}
 
-        {error && (
-          <p className="app-error">{error}</p>
-        )}
+          {error && (
+            <p className="app-error">{error}</p>
+          )}
 
-        {lyric && !isLoading && (
-          <>
-            <LyricDisplay
-              lyric={lyric}
-              onAnimationComplete={() => setTypingComplete(true)}
-            />
-            {typingComplete && (
-              <div className="app-actions">
-                <CopyButton text={lyric} />
-              </div>
-            )}
-          </>
-        )}
+          {lyric && !isLoading && (
+            <>
+              <LyricDisplay
+                lyric={lyric}
+                onAnimationComplete={handleAnimationComplete}
+              />
+              {typingComplete && (
+                <div className="app-actions">
+                  <CopyButton text={lyric} />
+                </div>
+              )}
+            </>
+          )}
 
-        {((lyric && typingComplete) || error) && !isLoading && (
-          <button
-            type="button"
-            className="app-reset-button"
-            onClick={handleReset}
-          >
-            Ask another
-          </button>
-        )}
-      </div>
+          {((lyric && typingComplete) || error) && !isLoading && (
+            <button
+              type="button"
+              className="app-reset-button"
+              onClick={handleReset}
+            >
+              Ask another
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }
