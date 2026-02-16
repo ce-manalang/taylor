@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vercel
+.env*.local
+scripts/seed-lyrics.sql
+scripts/seed-lyrics.ts
