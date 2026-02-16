@@ -1,0 +1,28 @@
+.copy-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--color-text-muted);
+  padding: 8px 14px;
+  border-radius: 16px;
+  transition: all var(--transition-fast);
+  min-height: 36px;
+  margin-top: 12px;
+}
+
+.copy-button:hover {
+  color: var(--color-text);
+  background: var(--color-bg-secondary);
+}
+
+.copy-button svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.copy-button.copied {
+  color: var(--color-accent);
+}
