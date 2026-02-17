@@ -1,3 +1,9 @@
+.question-input-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .question-input-wrapper {
   display: flex;
   align-items: center;
@@ -54,4 +60,16 @@
 
 .question-input-wrapper.compact {
   max-width: 480px;
+}
+
+@media (min-width: 601px) {
+  .question-input-wrapper {
+    width: min(720px, 100%);
+    max-width: none;
+  }
+
+  .question-input-wrapper.compact {
+    width: min(620px, 100%);
+    max-width: none;
+  }
 }

@@ -21,7 +21,7 @@ export function QuestionInput({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="question-input-form" onSubmit={handleSubmit}>
       <div
         className={`question-input-wrapper${compact ? ' compact' : ''}`}
       >

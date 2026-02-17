@@ -20,6 +20,12 @@
   margin-bottom: auto;
 }
 
+@media (min-width: 601px) {
+  .app-input-area {
+    max-width: 760px;
+  }
+}
+
 /* After submission: input moves to top area */
 .app-container.submitted .app-input-area {
   margin-top: 10vh;
